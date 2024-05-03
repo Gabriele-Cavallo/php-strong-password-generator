@@ -1,5 +1,6 @@
 <?php 
-
+$userPasswordLength = isset($_GET['password-length']) ? $_GET['password-length'] : 0;
+$userPasswordLengthAsNumber = intval($userPasswordLength);
 ?>
 
 <!DOCTYPE html>
