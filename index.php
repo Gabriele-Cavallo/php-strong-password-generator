@@ -13,6 +13,9 @@ $filterUpperCase = isset($_GET['upperCase']) ? true : false;
 $filterNumbers = isset($_GET['numbers']) ? true : false;
 $filterSymbols = isset($_GET['symbols']) ? true : false;
 
+// Filtro per i duplicati
+$filterDuplicate = isset($_GET['duplicate']) &&  $_GET['duplicate'] == '1' ? true : false;
+
 if ($filterUpperCase) {
     $fullPasswordCharacters .= $upperCaseLetters;
 }
@@ -26,12 +29,15 @@ if ($filterSymbols) {
 require __DIR__ . '/functions.php';
 
 // Password dell'utente generata random
-$userPassword = generateRandomPassword($userPasswordLengthAsNumber, $fullPasswordCharacters);
+$userPassword = generateRandomPassword($userPasswordLengthAsNumber, $fullPasswordCharacters, $filterDuplicate);
+$userPasswordCharacter = strlen($userPassword);
+var_dump($fullPasswordCharacters);
+var_dump($filterDuplicate);
 
 // Inizializzo la sessione
 session_start();
 $_SESSION['userPassword'] = $userPassword;
-$_SESSION['userPasswordLength'] = $userPasswordLength;
+$_SESSION['userPasswordLength'] = $userPasswordCharacter;
 if ($userPassword) {
     header('Location: ./password.php');
 };
@@ -71,6 +77,19 @@ if ($userPassword) {
                             <label class="col-7" for="password-length">Lunghezza password:</label>
                             <div class="input-col col-5">
                                 <input type="number" id="password-length" name="password-length">
+                            </div>
+                        </div>
+                        <div class="d-flex text-start">
+                            <div class="col-7">Consenti ripetizioni di uno o piu' caratteri:</div>
+                            <div class="radio-wrapper col-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="duplicate" id="flexRadioDefault1" value="1">
+                                    <label class="form-check-label" for="flexRadioDefault1">Si</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="duplicate" id="flexRadioDefault2" value="0">
+                                    <label class="form-check-label" for="flexRadioDefault2">No</label>
+                                </div>
                             </div>
                         </div>
                         <div class="checkbox-wrapper col-5 offset-7 text-start">
