@@ -13,6 +13,14 @@ require __DIR__ . '/functions.php';
 
 // Password dell'utente generata random
 $userPassword = generateRandomPassword($userPasswordLengthAsNumber, $fullPasswordCharacters);
+
+// Inizializzo la sessione
+session_start();
+$_SESSION['userPassword'] = $userPassword;
+$_SESSION['userPasswordLength'] = $userPasswordLength;
+if ($userPassword) {
+    header('Location: ./password.php');
+};
 ?>
 
 <!DOCTYPE html>

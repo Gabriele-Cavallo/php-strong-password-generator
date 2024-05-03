@@ -8,7 +8,7 @@
     background-color: #001632;
     height: 100vh;
 }
-h1{
+.col-12 h1{
     color: gray;
 }
 h3{
@@ -20,4 +20,8 @@ h3{
 input{
     appearance: textfield;
     width: 50%;
+}
+.btn-wrapper button a{
+    color: white !important;
+    text-decoration: none;
 }
