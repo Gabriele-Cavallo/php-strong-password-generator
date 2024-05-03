@@ -6,8 +6,22 @@ $upperCaseLetters = 'ABCDEFGHIL';
 $numbers = '0123456789';
 $symbols = '!?$%&<>{}`';
 $fullPasswordCharacters;
-$fullPasswordCharacters = $lowerCaseLetters . $upperCaseLetters . $numbers . $symbols;
+$fullPasswordCharacters = $lowerCaseLetters;
 
+// Filtri per lettere maiuscole, numeri e simboli
+$filterUpperCase = isset($_GET['upperCase']) ? true : false;
+$filterNumbers = isset($_GET['numbers']) ? true : false;
+$filterSymbols = isset($_GET['symbols']) ? true : false;
+
+if ($filterUpperCase) {
+    $fullPasswordCharacters .= $upperCaseLetters;
+}
+if ($filterNumbers) {
+    $fullPasswordCharacters .= $numbers;
+}
+if ($filterSymbols) {
+    $fullPasswordCharacters .= $symbols;
+}
 // Richiamo delle funzioni inserite nella pagina functions.php
 require __DIR__ . '/functions.php';
 
@@ -57,6 +71,26 @@ if ($userPassword) {
                             <label class="col-7" for="password-length">Lunghezza password:</label>
                             <div class="input-col col-5">
                                 <input type="number" id="password-length" name="password-length">
+                            </div>
+                        </div>
+                        <div class="checkbox-wrapper col-5 offset-7 text-start">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="upperCase" value="1" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Lettere maiuscole
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="numbers" value="1" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    Numeri
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="symbols" value="1" id="flexCheckChecked">
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    Simboli
+                                </label>
                             </div>
                         </div>
                         <div class="btn-wrapper my-3">
