@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.section{
+    background-color: #001632;
+    height: 100vh;
+}
+h1{
+    color: gray;
+}
+h3{
+    color: white;
+}
+.card.text-bg-info{
+    color: azure !important;
+}
+input{
+    appearance: textfield;
+    width: 50%;
+}
