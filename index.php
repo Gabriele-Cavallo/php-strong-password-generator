@@ -1,6 +1,13 @@
 <?php 
 $userPasswordLength = isset($_GET['password-length']) ? $_GET['password-length'] : 0;
 $userPasswordLengthAsNumber = intval($userPasswordLength);
+$lowerCaseLetters = 'abcdefghil';
+$upperCaseLetters = 'ABCDEFGHIL';
+$numbers = '0123456789';
+$symbols = '!?$%&<>{}`';
+$fullPasswordCharacters;
+$fullPasswordCharacters = $lowerCaseLetters . $upperCaseLetters . $numbers . $symbols;
+var_dump($fullPasswordCharacters);
 ?>
 
 <!DOCTYPE html>
