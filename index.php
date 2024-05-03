@@ -7,7 +7,23 @@ $numbers = '0123456789';
 $symbols = '!?$%&<>{}`';
 $fullPasswordCharacters;
 $fullPasswordCharacters = $lowerCaseLetters . $upperCaseLetters . $numbers . $symbols;
-var_dump($fullPasswordCharacters);
+
+// Password dell'utente generata random
+$userPassword = generateRandomPassword($userPasswordLengthAsNumber, $fullPasswordCharacters);
+
+// Funzione che genera una password randomicamente
+// $passwordLength --> lunghezza della password scelta dall'utente
+// $passwordCharactersString --> stringa contenente tutti i caratteri a disposizione per la generazione della password
+// return --> password contenente caratteri random fra quelli a disposizione e lunga quanto deciso dall'utente
+function generateRandomPassword($passwordLength, $passwordCharactersString){
+    $randomPassword = '';
+    $passwordCharactersStringLength = strlen($passwordCharactersString);
+    for ($i = 0; $i < $passwordLength; $i++) {
+        $randomIndex= rand(0, $passwordCharactersStringLength);
+        $randomPassword .= $passwordCharactersString[$randomIndex];
+    }
+    return $randomPassword;
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +48,11 @@ var_dump($fullPasswordCharacters);
                     <h3 class=" fw-bold">Genera una password sicura</h3>
                 </div>
                 <div class="card col-12 text-bg-info text-start py-3 mb-3">
-                    Nessun parametro valido inserito
+                    <?php if(empty($userPassword) || $userPassword == '') { ?>
+                        <div>Nessun parametro valido inserito</div>
+                    <?php } else { ?>
+                        <div>La tua password è: <?php echo $userPassword; ?> , lunga <?php echo $userPasswordLengthAsNumber ?> caratteri.</div>
+                    <?php } ?>
                 </div>
                 <div class="card col-12 py-3">
                     <form method="get">
