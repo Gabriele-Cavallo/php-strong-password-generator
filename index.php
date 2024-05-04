@@ -8,14 +8,13 @@ $symbols = '!?$%&<>{}`';
 $fullPasswordCharacters;
 $fullPasswordCharacters = $lowerCaseLetters;
 
+// Filtro per i duplicati
+$filterDuplicate = isset($_GET['duplicate']) &&  $_GET['duplicate'] == '1' ? true : false;
+
 // Filtri per lettere maiuscole, numeri e simboli
 $filterUpperCase = isset($_GET['upperCase']) ? true : false;
 $filterNumbers = isset($_GET['numbers']) ? true : false;
 $filterSymbols = isset($_GET['symbols']) ? true : false;
-
-// Filtro per i duplicati
-$filterDuplicate = isset($_GET['duplicate']) &&  $_GET['duplicate'] == '1' ? true : false;
-
 if ($filterUpperCase) {
     $fullPasswordCharacters .= $upperCaseLetters;
 }
@@ -25,14 +24,13 @@ if ($filterNumbers) {
 if ($filterSymbols) {
     $fullPasswordCharacters .= $symbols;
 }
+
 // Richiamo delle funzioni inserite nella pagina functions.php
 require __DIR__ . '/functions.php';
 
 // Password dell'utente generata random
 $userPassword = generateRandomPassword($userPasswordLengthAsNumber, $fullPasswordCharacters, $filterDuplicate);
 $userPasswordCharacter = strlen($userPassword);
-var_dump($fullPasswordCharacters);
-var_dump($filterDuplicate);
 
 // Inizializzo la sessione
 session_start();
@@ -76,7 +74,7 @@ if ($userPassword) {
                         <div class="input-wrapper d-flex text-start">
                             <label class="col-7" for="password-length">Lunghezza password:</label>
                             <div class="input-col col-5">
-                                <input type="number" id="password-length" name="password-length">
+                                <input type="number" id="password-length" name="password-length" min="1" placeholder="Lunghezza massima 10 caratteri senza filtri attivi">
                             </div>
                         </div>
                         <div class="d-flex text-start">

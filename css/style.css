@@ -17,9 +17,10 @@ h3{
 .card.text-bg-info{
     color: azure !important;
 }
-input{
+.input-col input{
     appearance: textfield;
-    width: 50%;
+    width: 70%;
+    padding-left: 5px;
 }
 .btn-wrapper button a{
     color: white !important;
